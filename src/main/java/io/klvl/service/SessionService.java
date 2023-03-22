@@ -1,5 +1,6 @@
 package io.klvl.service;
 
+import io.klvl.common.SessionNotFoundException;
 import io.klvl.model.Session;
 import io.klvl.repository.SessionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,21 @@ public class SessionService {
         session.setSessionId(System.currentTimeMillis());
         sessionRepository.save(session);
         return session;
+    }
+
+    public Session findSession(long sessionId) {
+        return sessionRepository
+                .findBySessionId(sessionId)
+                .orElseThrow( () -> new SessionNotFoundException("Session with id " + sessionId + " was not found!"));
+    }
+
+    public boolean isSessionExist(long sessionId) {
+        try {
+            findSession(sessionId);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
 }
