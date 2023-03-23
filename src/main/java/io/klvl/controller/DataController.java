@@ -2,6 +2,7 @@ package io.klvl.controller;
 
 import io.klvl.model.Payload;
 import io.klvl.model.Session;
+import io.klvl.service.PayloadService;
 import io.klvl.service.SessionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,6 +23,9 @@ public class DataController {
 
     @Autowired
     private SessionService sessionService;
+
+    @Autowired
+    private PayloadService payloadService;
 
     @RequestMapping(value = "/post", method = RequestMethod.POST)
     public ResponseEntity post(
@@ -45,9 +49,10 @@ public class DataController {
         }
 
         Session session = sessionService.findSession(sessionId);
-        session.getPayload().add(
-                new Payload( headers, body, endpoint, method)
-        );
+        Payload payload = new Payload( headers, body, endpoint, method);
+        session.getPayload().add(payload);
+        payloadService.save(payload);
+        sessionService.save(session);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 

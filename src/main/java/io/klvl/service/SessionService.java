@@ -34,4 +34,8 @@ public class SessionService {
         }
     }
 
+    public void save(Session session) {
+        sessionRepository.save(session);
+    }
+
 }
