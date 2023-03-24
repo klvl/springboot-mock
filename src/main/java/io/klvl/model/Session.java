@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 
 import java.util.Set;
 
+@SuppressWarnings("unused")
 @Entity
 @Table
 @Data

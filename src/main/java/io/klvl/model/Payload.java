@@ -37,8 +37,8 @@ public class Payload {
     @Column
     private String time;
 
+    @SuppressWarnings("unused")
     public Payload() {
-
     }
 
     public Payload(Map<String, String> headers, String payload, String endpoint, RequestMethod method) {

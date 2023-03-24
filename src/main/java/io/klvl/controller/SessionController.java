@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+@SuppressWarnings("unused")
 @RestController
 @RequestMapping(value = "/session")
 public class SessionController {
@@ -17,7 +18,7 @@ public class SessionController {
     private SessionService sessionService;
 
     @RequestMapping(value = "/create", method = RequestMethod.GET)
-    public ResponseEntity create() {
+    public ResponseEntity<Session> create() {
         Session session = sessionService.createSession();
         return new ResponseEntity<>(session, HttpStatus.OK);
     }

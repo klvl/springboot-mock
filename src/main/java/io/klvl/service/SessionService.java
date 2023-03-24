@@ -6,6 +6,7 @@ import io.klvl.repository.SessionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+@SuppressWarnings("unused")
 @Service
 public class SessionService {
 
@@ -25,6 +26,7 @@ public class SessionService {
                 .orElseThrow( () -> new SessionNotFoundException("Session with id " + sessionId + " was not found!"));
     }
 
+    @SuppressWarnings("BooleanMethodIsAlwaysInverted")
     public boolean isSessionExist(long sessionId) {
         try {
             findSession(sessionId);

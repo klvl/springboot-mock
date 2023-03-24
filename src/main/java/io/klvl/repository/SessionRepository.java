@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
+@SuppressWarnings("unused")
 @Repository
 public interface SessionRepository extends JpaRepository<Session, Long> {
 

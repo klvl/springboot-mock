@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Comparator;
+import java.util.stream.Stream;
 
+@SuppressWarnings("unused")
 @RestController
 @RequestMapping(value = "{session_id}/results")
 public class ResultsController {
@@ -20,9 +22,9 @@ public class ResultsController {
     private SessionService sessionService;
 
     @RequestMapping(value = "/data", method = RequestMethod.GET)
-    public ResponseEntity resultData(@PathVariable( "session_id" ) long sessionId) {
+    public ResponseEntity<Stream<Payload>> resultData(@PathVariable( "session_id" ) long sessionId) {
         if (!sessionService.isSessionExist(sessionId)) {
-            return new ResponseEntity(HttpStatus.UNPROCESSABLE_ENTITY);
+            return new ResponseEntity<>(HttpStatus.UNPROCESSABLE_ENTITY);
         }
         return new ResponseEntity<>(
                 sessionService.findSession(sessionId)

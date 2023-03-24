@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Map;
 
+@SuppressWarnings("unused")
 @RestController
 @RequestMapping(value = "/data")
 public class DataController {
@@ -28,7 +29,7 @@ public class DataController {
     private PayloadService payloadService;
 
     @RequestMapping(value = "/post", method = RequestMethod.POST)
-    public ResponseEntity post(
+    public ResponseEntity<String> post(
             @RequestParam( "session_id" ) long sessionId,
             @RequestHeader Map<String, String> headers,
             @Nullable @RequestBody String body
@@ -36,7 +37,7 @@ public class DataController {
         return receive(sessionId, body, headers, "/data/post", RequestMethod.POST);
     }
 
-    private ResponseEntity receive(
+    private ResponseEntity<String> receive(
             long sessionId,
             String body,
             Map<String, String> headers,
