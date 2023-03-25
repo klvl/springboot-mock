@@ -55,6 +55,15 @@ public class DataController {
         return receive(sessionId, body, headers, "/data/delete", RequestMethod.DELETE);
     }
 
+    @RequestMapping(value = "/patch", method = RequestMethod.PATCH)
+    public ResponseEntity<String> patch(
+            @RequestParam( "session_id" ) long sessionId,
+            @Nullable @RequestHeader Map<String, String> headers,
+            @Nullable @RequestBody String body
+    ) {
+        return receive(sessionId, body, headers, "/data/patch", RequestMethod.PATCH);
+    }
+
     private ResponseEntity<String> receive(
             long sessionId,
             String body,
