@@ -6,7 +6,7 @@ import io.klvl.repository.SessionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-@SuppressWarnings("unused")
+@SuppressWarnings( "unused" )
 @Service
 public class SessionService {
 
@@ -15,29 +15,29 @@ public class SessionService {
 
     public Session createSession() {
         Session session = new Session();
-        session.setSessionId(System.currentTimeMillis());
-        sessionRepository.save(session);
+        session.setSessionId( System.currentTimeMillis() );
+        sessionRepository.save( session );
         return session;
     }
 
-    public Session findSession(long sessionId) {
+    public Session findSession( long sessionId ) {
         return sessionRepository
-                .findBySessionId(sessionId)
-                .orElseThrow( () -> new SessionNotFoundException("Session with id " + sessionId + " was not found!"));
+                .findBySessionId( sessionId )
+                .orElseThrow( () -> new SessionNotFoundException( "Session with id " + sessionId + " was not found!" ) );
     }
 
-    @SuppressWarnings("BooleanMethodIsAlwaysInverted")
-    public boolean isSessionExist(long sessionId) {
+    @SuppressWarnings( "BooleanMethodIsAlwaysInverted" )
+    public boolean isSessionExist( long sessionId ) {
         try {
-            findSession(sessionId);
+            findSession( sessionId );
             return true;
-        } catch (Exception e) {
+        } catch ( Exception e ) {
             return false;
         }
     }
 
-    public void save(Session session) {
-        sessionRepository.save(session);
+    public void save( Session session ) {
+        sessionRepository.save( session );
     }
 
 }

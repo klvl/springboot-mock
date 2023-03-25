@@ -13,24 +13,24 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Comparator;
 import java.util.stream.Stream;
 
-@SuppressWarnings("unused")
+@SuppressWarnings( "unused" )
 @RestController
-@RequestMapping(value = "{session_id}/results")
+@RequestMapping( value = "{session_id}/results" )
 public class ResultsController {
 
     @Autowired
     private SessionService sessionService;
 
-    @RequestMapping(value = "/data", method = RequestMethod.GET)
-    public ResponseEntity<Stream<Payload>> resultData(@PathVariable( "session_id" ) long sessionId) {
-        if (!sessionService.isSessionExist(sessionId)) {
-            return new ResponseEntity<>(HttpStatus.UNPROCESSABLE_ENTITY);
+    @RequestMapping( value = "/data", method = RequestMethod.GET )
+    public ResponseEntity<Stream<Payload>> resultData( @PathVariable( "session_id" ) long sessionId ) {
+        if ( !sessionService.isSessionExist( sessionId ) ) {
+            return new ResponseEntity<>( HttpStatus.UNPROCESSABLE_ENTITY );
         }
         return new ResponseEntity<>(
-                sessionService.findSession(sessionId)
+                sessionService.findSession( sessionId )
                         .getPayload()
                         .stream()
-                        .sorted( Comparator.comparing(Payload::getId)),
+                        .sorted( Comparator.comparing( Payload::getId ) ),
                 HttpStatus.OK
         );
     }

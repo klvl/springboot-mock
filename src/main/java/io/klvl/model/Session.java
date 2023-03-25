@@ -10,7 +10,7 @@ import org.springframework.http.HttpStatus;
 
 import java.util.Set;
 
-@SuppressWarnings("unused")
+@SuppressWarnings( "unused" )
 @Entity
 @Table
 @Data
@@ -24,7 +24,7 @@ public class Session {
 
     private HttpStatus httpStatus;
 
-    @OneToMany(orphanRemoval = true)
+    @OneToMany( orphanRemoval = true )
     private Set<Payload> payload;
 
 }

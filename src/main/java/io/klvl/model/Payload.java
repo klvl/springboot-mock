@@ -37,28 +37,32 @@ public class Payload {
     @Column
     private String time;
 
-    @SuppressWarnings("unused")
+    @SuppressWarnings( "unused" )
     public Payload() {
     }
 
-    public Payload(Map<String, String> headers, String payload, String endpoint, RequestMethod method) {
-        this.setHeaders(headersToString(headers));
-        this.setPayload(payload);
-        this.setEndpoint(endpoint);
-        this.setMethod(method.name());
-        this.setTime(getPayloadTime());
+    public Payload( Map<String, String> headers, String payload, String endpoint, RequestMethod method ) {
+        this.setHeaders( headersToString( headers ) );
+        this.setPayload( getPayload( payload ) );
+        this.setEndpoint( endpoint );
+        this.setMethod( method.name() );
+        this.setTime( getPayloadTime() );
     }
 
-    private String headersToString(Map<String, String> headers) {
+    private String headersToString( Map<String, String> headers ) {
         return headers.keySet()
                 .stream()
-                .map( key -> key + "=" + headers.get(key))
-                .collect(Collectors.joining(", ", "[", "]"));
+                .map( key -> key + "=" + headers.get( key ) )
+                .collect( Collectors.joining( ", ", "[", "]" ) );
+    }
+
+    private String getPayload( String payload ) {
+        return payload == null ? "" : payload;
     }
 
     private String getPayloadTime() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
-        return formatter.format(LocalDateTime.now());
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern( "dd-MM-yyyy HH:mm:ss" );
+        return formatter.format( LocalDateTime.now() );
     }
 
 }
