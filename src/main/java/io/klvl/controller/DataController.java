@@ -40,10 +40,19 @@ public class DataController {
     @RequestMapping(value = "/get", method = RequestMethod.GET)
     public ResponseEntity<String> get(
             @RequestParam( "session_id" ) long sessionId,
-            @RequestHeader Map<String, String> headers,
+            @Nullable @RequestHeader Map<String, String> headers,
             @Nullable @RequestBody String body
     ) {
         return receive(sessionId, body, headers, "/data/get", RequestMethod.GET);
+    }
+
+    @RequestMapping(value = "/delete", method = RequestMethod.DELETE)
+    public ResponseEntity<String> delete(
+            @RequestParam( "session_id" ) long sessionId,
+            @Nullable @RequestHeader Map<String, String> headers,
+            @Nullable @RequestBody String body
+    ) {
+        return receive(sessionId, body, headers, "/data/delete", RequestMethod.DELETE);
     }
 
     private ResponseEntity<String> receive(
