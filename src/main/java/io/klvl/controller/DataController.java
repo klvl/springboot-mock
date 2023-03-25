@@ -31,10 +31,19 @@ public class DataController {
     @RequestMapping(value = "/post", method = RequestMethod.POST)
     public ResponseEntity<String> post(
             @RequestParam( "session_id" ) long sessionId,
-            @RequestHeader Map<String, String> headers,
+            @Nullable @RequestHeader Map<String, String> headers,
             @Nullable @RequestBody String body
     ) {
         return receive(sessionId, body, headers, "/data/post", RequestMethod.POST);
+    }
+
+    @RequestMapping(value = "/get", method = RequestMethod.GET)
+    public ResponseEntity<String> get(
+            @RequestParam( "session_id" ) long sessionId,
+            @RequestHeader Map<String, String> headers,
+            @Nullable @RequestBody String body
+    ) {
+        return receive(sessionId, body, headers, "/data/get", RequestMethod.GET);
     }
 
     private ResponseEntity<String> receive(
